@@ -68,7 +68,7 @@ public class EditPanel<T> extends Panel
 
             @Override
             protected void populateItem(ListItem<SimpleSingularAttribute> item)
-            {                
+            {
                 item.add(new Label("name", new PropertyModel<String>(item.getModel(), "name")));
                 item.add(new TextField("field", new SingularAttributeValueModel(model, item.getModelObject())));
             }
