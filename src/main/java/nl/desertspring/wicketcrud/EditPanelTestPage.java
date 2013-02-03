@@ -23,6 +23,7 @@ public class EditPanelTestPage extends WebPage
     private CrudRepository crudRepository;
     
     public EditPanelTestPage() {
+        add(new ListPanel("listPanel", crudRepository, entityModelFactory.create(Car.class)));
         add(new EditPanel<Car>("panel", crudRepository, entityModelFactory.create(Car.class), Model.of(new Car())));
     }
     

@@ -18,7 +18,7 @@ import javax.persistence.metamodel.SingularAttribute;
 public class EntityModel<T>
 {
 
-    private EntityType<T> entityClass;
+    private EntityType<T> entityType;
 
     public static class SimpleSingularAttribute<T>
     {
@@ -37,7 +37,13 @@ public class EntityModel<T>
             return name;
         }
         
-        
+        public Class<?> getType() {
+            if (member instanceof Field) {
+                return ((Field)member).getType();
+            }
+            
+            return null;
+        }
 
         public Object getValue(T entity)
         {
@@ -52,8 +58,9 @@ public class EntityModel<T>
 
             return null;
         }
-        
-        public void setValue(T entity, Object value) {
+
+        public void setValue(T entity, Object value)
+        {
             if (member instanceof Field) {
                 try {
                     ((Field) member).set(entity, value);
@@ -65,19 +72,26 @@ public class EntityModel<T>
         }
     }
 
-    EntityModel(EntityType<T> entityClass)
+    EntityModel(EntityType<T> entityType)
     {
-        this.entityClass = entityClass;
+        this.entityType = entityType;
     }
 
     public List<SimpleSingularAttribute> getSingularAttributes()
     {
         List<SimpleSingularAttribute> results = new ArrayList<SimpleSingularAttribute>();
 
-        for (SingularAttribute singularAttribute : entityClass.getSingularAttributes()) {
+        for (SingularAttribute singularAttribute : entityType.getSingularAttributes()) {
             results.add(new SimpleSingularAttribute<T>(singularAttribute.getName(), singularAttribute.getJavaMember()));
         }
 
         return results;
     }
+
+    public EntityType<T> getEntityType()
+    {
+        return entityType;
+    }
+
+    
 }
