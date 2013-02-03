@@ -52,6 +52,17 @@ public class EntityModel<T>
 
             return null;
         }
+        
+        public void setValue(T entity, Object value) {
+            if (member instanceof Field) {
+                try {
+                    ((Field) member).set(entity, value);
+                }
+                catch (Exception ex) {
+                    throw new IllegalStateException(ex);
+                }
+            }
+        }
     }
 
     EntityModel(EntityType<T> entityClass)

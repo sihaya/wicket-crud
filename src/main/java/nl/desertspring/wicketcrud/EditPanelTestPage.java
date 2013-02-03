@@ -19,8 +19,11 @@ public class EditPanelTestPage extends WebPage
     @SpringBean
     private EntityModelFactory entityModelFactory;
     
+    @SpringBean
+    private CrudRepository crudRepository;
+    
     public EditPanelTestPage() {
-        add(new EditPanel<Car>("panel", entityModelFactory.create(Car.class), Model.of(new Car())));
+        add(new EditPanel<Car>("panel", crudRepository, entityModelFactory.create(Car.class), Model.of(new Car())));
     }
     
 }

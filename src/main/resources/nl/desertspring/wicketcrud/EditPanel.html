@@ -1,8 +1,12 @@
 <wicket:panel>
-    <ul>
-        <li wicket:id="items">
-            <label wicket:id="name"/>
-            <input type="text" wicket:id="field"/>
-        </li>
-    </ul>
+    <form wicket:id="form">
+        <ul>
+            <li wicket:id="items">
+                <label wicket:id="name"/>
+                <input type="text" wicket:id="field"/>
+            </li>
+        </ul>
+        
+        <input type="submit" value="Save" wicket:id="save"/>
+    </form>
 </wicket:panel>
